@@ -114,7 +114,7 @@ function CusModalTail(props) {
         color="error"
         endIcon={<ClearIcon />}
         onClick={() => setModalClose(false)}
-        sx={{ visibility: props.cancelVisible ? "visible" : "hidden" }}
+        sx={{ display: props.cancelVisible ? "block" : "none" }}
       >
         취소
       </Button>

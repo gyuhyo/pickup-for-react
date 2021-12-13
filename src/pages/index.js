@@ -12,9 +12,9 @@ export default function Home() {
 
   const handleDrawerOpen = (type) => {
     if (type === "register") {
-      setDrawerTypeComponent(<Register />);
+      setDrawerTypeComponent(<Register drawerOpen={setDrawerOpen} />);
     } else {
-      setDrawerTypeComponent(<Login />);
+      setDrawerTypeComponent(<Login drawerOpen={setDrawerOpen} />);
     }
 
     console.log(drawerTypeComponent);

@@ -4,7 +4,6 @@ import {
   Divider,
   FormControl,
   FormControlLabel,
-  FormHelperText,
   InputLabel,
   MenuItem,
   Paper,
@@ -18,38 +17,19 @@ import { Box } from "@mui/system";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { RegisterYup } from "../../yups/RegisterYup";
-import { yupResolver } from "@hookform/resolvers/yup/dist/yup.umd";
 import ControllerField from "./ControllerField";
-import { useSetRecoilState } from "recoil";
-import { userState } from "../../atoms/Users";
-import { useSnackbar } from "notistack";
 
-function Register(props) {
-  const { enqueueSnackbar: snack } = useSnackbar();
-  const setUsers = useSetRecoilState(userState);
-
+function Register() {
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(RegisterYup),
+    resolver: RegisterYup,
   });
 
   const handleRegister = handleSubmit((data) => {
-    setUsers((user) => [
-      ...user,
-      {
-        email: data.email,
-        password: data.password,
-        sosok: data.sosok,
-        name: data.name,
-        phone: data.phone,
-      },
-    ]);
-    snack("회원가입 완료", { variant: "success" });
-
-    props.drawerOpen({ open: false, type: null });
+    console.log(data);
   });
 
   return (
@@ -89,23 +69,16 @@ function Register(props) {
 
       <FormControl sx={{ width: "100%", mt: 2 }}>
         <InputLabel id="demo-simple-select-filled-label">소속</InputLabel>
-        <Controller
+        <Select
+          labelId="demo-simple-select-filled-label"
+          label="소속"
           name="sosok"
-          control={control}
-          defaultValue="A"
-          render={({ field }) => (
-            <Select
-              {...field}
-              labelId="demo-simple-select-filled-label"
-              label="소속"
-              IconComponent={() => <SearchIcon sx={{ mr: 1 }} />}
-            >
-              <MenuItem value="A">A소속</MenuItem>
-              <MenuItem value="B">B소속</MenuItem>
-              <MenuItem value="C">C소속</MenuItem>
-            </Select>
-          )}
-        />
+          IconComponent={() => <SearchIcon sx={{ mr: 1 }} />}
+        >
+          <MenuItem value="A">A소속</MenuItem>
+          <MenuItem value="B">B소속</MenuItem>
+          <MenuItem value="C">C소속</MenuItem>
+        </Select>
         <FormControlLabel
           control={<Checkbox size="small" />}
           label="소속정보 없음"
@@ -141,7 +114,7 @@ function Register(props) {
         <ControllerField
           name="access_number"
           control={control}
-          error={errors.access_number}
+          error={errors.phone}
           label="인증번호 입력"
           sx={{ width: "58%" }}
         />
@@ -164,27 +137,17 @@ function Register(props) {
               justifyContent: "space-between",
             }}
           >
-            <Controller
-              name="chk1"
-              type="checkbox"
-              control={control}
-              render={({ field }) => (
-                <FormControlLabel
-                  control={<Checkbox {...field} name="chk1" size="small" />}
-                  label="서비스 이용약관 동의 (필수)"
-                  sx={{
-                    "& .MuiFormControlLabel-label": { fontSize: 12 },
-                  }}
-                />
-              )}
+            <FormControlLabel
+              control={<Checkbox size="small" />}
+              label="서비스 이용약관 동의 (필수)"
+              sx={{
+                "& .MuiFormControlLabel-label": { fontSize: 12 },
+              }}
             />
             <ArrowForwardIosIcon
               sx={{ color: "#ababab", fontSize: 14, alignSelf: "center" }}
             />
           </Box>
-          <FormHelperText sx={{ color: "red" }}>
-            {errors.chk1 && errors.chk1?.message}
-          </FormHelperText>
           <Box
             sx={{
               display: "flex",
@@ -192,27 +155,17 @@ function Register(props) {
               justifyContent: "space-between",
             }}
           >
-            <Controller
-              name="chk2"
-              type="checkbox"
-              control={control}
-              render={({ field }) => (
-                <FormControlLabel
-                  control={<Checkbox {...field} name="chk2" size="small" />}
-                  label="개인정보 수집 동의 (필수)"
-                  sx={{
-                    "& .MuiFormControlLabel-label": { fontSize: 12 },
-                  }}
-                />
-              )}
+            <FormControlLabel
+              control={<Checkbox size="small" />}
+              label="개인정보 수집 동의 (필수)"
+              sx={{
+                "& .MuiFormControlLabel-label": { fontSize: 12 },
+              }}
             />
             <ArrowForwardIosIcon
               sx={{ color: "#ababab", fontSize: 14, alignSelf: "center" }}
             />
           </Box>
-          <FormHelperText sx={{ color: "red" }}>
-            {errors.chk2 && errors.chk2?.message}
-          </FormHelperText>
         </Box>
       </Paper>
       <Button type="submit" variant="contained" sx={{ mt: 2, width: "100%" }}>
