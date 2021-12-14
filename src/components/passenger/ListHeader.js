@@ -14,7 +14,7 @@ function ListHeader() {
       <Typography
         className={styles.loginTitle}
         variant="h6"
-        component="h7"
+        component="h6"
         sx={{ fontWeight: "bold" }}
       >
         <span style={{ fontStyle: "italic" }}>Pick-up service</span>{" "}

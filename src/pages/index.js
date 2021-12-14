@@ -31,7 +31,7 @@ export default function Home() {
             height="35"
             className={styles.loginLogo}
           />
-          <Typography className={styles.loginTitle} variant="h5" component="h7">
+          <Typography className={styles.loginTitle} variant="h5">
             HTS에 오신 것을 환영합니다.
           </Typography>
         </div>

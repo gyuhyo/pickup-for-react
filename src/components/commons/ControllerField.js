@@ -3,7 +3,6 @@ import React from "react";
 import { Controller } from "react-hook-form";
 
 function ControllerField(props) {
-  console.log(props.label + " : " + props.type);
   const {
     name,
     type = "text",
@@ -15,9 +14,10 @@ function ControllerField(props) {
     sx,
     autoFocus = false,
     autoComplete = "off",
+    multiline = false,
+    rows = 0,
   } = props;
 
-  console.log(label + " : " + type);
   return (
     <Controller
       name={name}
@@ -26,6 +26,8 @@ function ControllerField(props) {
       render={({ field }) => (
         <TextField
           {...field}
+          multiline={multiline}
+          rows={rows}
           type={type}
           error={!!error}
           helperText={error ? error?.message : ""}

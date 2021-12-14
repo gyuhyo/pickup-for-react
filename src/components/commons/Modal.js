@@ -43,7 +43,7 @@ function CusModalHeader(props) {
         alignItems="center"
       >
         <Grid item xs={9}>
-          <Typography variant="h7" component="h3">
+          <Typography variant="h6" component="h3">
             {props.children}
           </Typography>
         </Grid>
